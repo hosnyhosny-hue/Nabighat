@@ -1,0 +1,11 @@
+{
+  "version": "3.0.0-preview.1",
+  "status": "domain-foundation-only-in-repository",
+  "full_preview_location": "conversation-delivered-source-and-html",
+  "preview_sha256": "31b4084bea0074a28d99fc3816c162b93b646dffa06bc34f5da5ca1a544953a1",
+  "base_commit": "334a12c4dc484bae1633bfbb4aa90c12b3e0500b",
+  "public_site_changed": false,
+  "archive_assets_published": false,
+  "physical_device_tested": false,
+  "new_arabic_audio_reviewed": false
+}
