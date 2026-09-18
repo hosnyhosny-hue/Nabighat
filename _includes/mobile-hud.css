@@ -1,0 +1,153 @@
+
+/* 2.2.3 · Play-first mobile HUD. Keep readable typography; remove redundant panels.
+   These overrides are limited to gameplay. Menus, recording review and desktop keep their layout. */
+.mobile-only,.mobile-answer-block{display:none}
+.gate-topline{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.gate-topline .peek{margin:0}
+.help-paused{background:#d6efe9;padding:12px 15px;border-radius:12px;color:#125b61!important}
+.help-current{background:#dfedf7;border:1px solid #bdd4e5;border-radius:14px;padding:12px 16px}
+.help-current h3{font-size:22px;line-height:1.65;margin:4px 0}
+.help-pattern{font-size:26px!important;color:#155d71!important;text-align:center;letter-spacing:2px!important}
+
+body.mobile-ui{--hud-top:max(10px,env(safe-area-inset-top));--hud-bottom:max(12px,env(safe-area-inset-bottom));--mobile-question-end:230px}
+body.mobile-ui #hud .mobile-only{display:grid}
+body.mobile-ui #hud .hud-left{left:max(12px,env(safe-area-inset-left));top:var(--hud-top);gap:0}
+body.mobile-ui #hud .hud-right{right:max(12px,env(safe-area-inset-right));top:var(--hud-top);gap:6px}
+body.mobile-ui #hud .hud-right .icon-btn{min-width:44px;height:44px;padding:0;border-radius:13px;font-size:22px;background:#092d55ed}
+body.mobile-ui #hud .hud-right .icon-btn.lang{padding:0 11px;font-size:15px;min-width:76px}
+body.mobile-ui #hud #audioHud{display:none}
+body.mobile-ui #hud .score-box{height:44px;min-width:84px;gap:8px;padding:4px 10px 4px 5px;border-radius:13px;background:#092d55ed}
+body.mobile-ui #hud .hud-portrait{width:29px;height:34px;border-radius:9px;object-fit:cover}
+body.mobile-ui #hud .score-box strong{font-size:24px;line-height:1.1}
+body.mobile-ui #hud .score-box small,body.mobile-ui #hud .score-box .star,body.mobile-ui #hud .combo{display:none}
+/* One title, one distance readout, one thin progress bar. No duplicate values. */
+body.mobile-ui #hud .mission-pill{top:calc(var(--hud-top) + 52px);left:12px;right:12px;width:auto;max-width:none;transform:none;min-height:38px;height:38px;padding:5px 12px 7px;border:1px solid #c4f0ff55;border-radius:11px;display:flex;align-items:center;justify-content:space-between;gap:8px;background:#092d55df;text-align:start;box-shadow:0 3px 12px #00335520}
+body.mobile-ui #hud .mission-pill h2{font-size:16px!important;line-height:1.35;margin:0;color:#fff!important;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body.mobile-ui #hud .mission-pill>small,body.mobile-ui #hud .mission-marks{display:none}
+body.mobile-ui #hud .mission-pill .distance{font-size:13px;line-height:1.3;background:transparent;margin:0;padding:0;color:#c7f5ff;white-space:nowrap;flex-shrink:0}
+body.mobile-ui #hud .track-progress{position:absolute;bottom:0;left:10px;right:10px;height:3px;margin:0;border-radius:3px;background:#ffffff20;direction:ltr}
+body.mobile-ui #hud .track-progress i{box-shadow:none;background:#ffe560}
+body.mobile-ui[data-play-mode=hub] #hud .track-progress,body.mobile-ui[data-play-mode=hub] #hud .distance{display:none}
+
+/* Prompts stay at the top edge, away from the runner. Details live in the paused Help view. */
+body.mobile-ui #hud .gate-panel{top:calc(var(--hud-top) + 100px);left:12px;right:12px;width:auto;max-width:none;transform:none;border-radius:16px;padding:9px 13px 12px;max-height:none;overflow:visible;background:#08294ded;box-shadow:0 6px 22px #00214930;pointer-events:auto;text-align:start;border:1px solid #a5deea80}
+body.mobile-ui #hud .gate-panel .gate-topline{min-height:24px;gap:8px}
+body.mobile-ui #hud .gate-panel .eyebrow{font-size:13px;line-height:1.3;letter-spacing:0;color:#70e9df;white-space:nowrap}
+body.mobile-ui #hud .gate-panel h3{font-size:calc(19px * var(--reading-scale))!important;line-height:1.45;margin:5px 0 0;font-weight:600!important}
+body.mobile-ui #hud .gate-panel .pattern{font-size:26px;line-height:1.3;margin:6px 0 0;text-align:center;white-space:nowrap;letter-spacing:2px!important}
+body.mobile-ui #hud .gate-panel .pattern:empty{display:none}
+body.mobile-ui #hud .gate-panel #gateHint{display:none}
+body.mobile-ui #hud .gate-panel .peek{font-size:14px!important;line-height:1.2;min-height:40px;height:40px;padding:6px 11px;border-radius:10px;margin:-3px -3px -1px 0;color:#fff;background:#1a5676}
+body.mobile-ui[data-gate-state=preview] #hud .gate-panel{display:flex;align-items:center;justify-content:space-between;padding:11px 15px;gap:12px;min-height:60px;border-color:#ffe560aa}
+body.mobile-ui[data-gate-state=preview] #hud .gate-panel .gate-topline{display:none}
+body.mobile-ui[data-gate-state=preview] #hud .gate-panel h3{margin:0;font-size:calc(18px * var(--reading-scale))!important}
+body.mobile-ui[data-gate-state=preview] #hud .gate-panel .pattern{margin:0;font-size:30px;flex-shrink:0}
+body.mobile-ui #hud .coach{top:calc(var(--hud-top) + 100px);bottom:auto;left:12px;right:12px;width:auto;max-width:none;padding:9px 12px;gap:8px;background:#092d55de;border-radius:12px;box-shadow:none}
+body.mobile-ui #hud .coach b{display:none}
+body.mobile-ui #hud .coach p{font-size:15px;line-height:1.55;margin:0}
+body.mobile-ui #hud .coach .robot-face{width:27px;height:23px;border-width:3px;font-size:15px;margin-top:2px}
+body.mobile-ui[data-play-mode=hub] #hud .coach{display:none}
+body.mobile-ui #hud .hub-info{top:calc(var(--hud-top) + 101px);right:12px;left:12px;max-width:none;width:auto;max-height:none;padding:0;background:transparent;border:0;box-shadow:none;overflow:visible}
+body.mobile-ui #hud .hub-info>b,body.mobile-ui #hud .hub-info>p{display:none}
+body.mobile-ui #hud .plaza-talk{margin:0;gap:8px;justify-content:center}
+body.mobile-ui #hud .plaza-talk button{min-height:44px;font-size:15px;border-radius:12px;padding:7px 14px;background:#0d365bea}
+body.mobile-ui #toast{top:calc(var(--hud-top) + 100px);left:12px;right:12px;transform:none;max-width:none;min-width:0;width:auto;padding:10px 12px;box-shadow:none;border-radius:12px}
+body.mobile-ui #toast strong{font-size:16px;line-height:1.45}
+body.mobile-ui[data-screen=game] #toast p{display:none}
+body.mobile-ui[data-gate-state=waiting] #toast{display:none}
+body.mobile-ui:has(#toast:not([hidden])) #hud .coach{display:none}
+
+/* Caption preserves the full spoken sentence, without source/voice metadata in the playfield. */
+body.mobile-ui[data-screen=game] #rayyanCaption:not(.inline){left:12px;right:12px;top:calc(var(--hud-top) + 100px);bottom:auto;width:auto;max-width:none;padding:10px 12px;gap:8px;border-radius:13px;align-items:center;box-shadow:none}
+body.mobile-ui[data-screen=game] #rayyanCaption:not(.inline)>img{width:26px;height:32px;border-radius:7px}
+body.mobile-ui[data-screen=game] #rayyanCaption:not(.inline) .rayyan-caption-top,body.mobile-ui[data-screen=game] #rayyanCaption:not(.inline) small{display:none!important}
+body.mobile-ui[data-screen=game] #rayyanCaption:not(.inline) p{font-size:calc(17px * var(--reading-scale))!important;line-height:1.6;margin:0!important}
+body.mobile-ui[data-screen=game] #rayyanCaption:not(.inline)>button{width:28px;min-width:28px;height:36px;font-size:24px}
+body.mobile-ui[data-gate-state=waiting] #rayyanCaption:not(.inline),body.mobile-ui[data-gate-state=preview] #rayyanCaption:not(.inline){top:var(--mobile-question-end)}
+body.mobile-ui[data-play-mode=hub] #rayyanCaption:not(.inline){top:calc(var(--hud-top) + 153px)}
+body.mobile-ui:has(#rayyanCaption:not(.inline):not([hidden])) #hud .coach,body.mobile-ui:has(#rayyanCaption:not(.inline):not([hidden])) #toast{display:none}
+
+/* Movement controls at the bottom corners. A small central boost button preserves that ability. */
+body.mobile-ui #hud .touch-note,body.mobile-ui #hud .keyboard-help{display:none}
+body.mobile-ui #hud .touch .dpad{left:max(12px,env(safe-area-inset-left));bottom:calc(var(--hud-bottom) + 4px);gap:7px}
+body.mobile-ui #hud .touch .dpad button{width:46px;height:50px;min-height:44px;font-size:24px;border-radius:16px;box-shadow:0 3px 0 #06245370}
+body.mobile-ui #hud .touch .right-pad{right:max(12px,env(safe-area-inset-right));bottom:calc(var(--hud-bottom) + 4px);gap:7px;align-items:flex-end}
+body.mobile-ui #hud .touch .right-pad button{width:59px;height:65px;font-size:25px;border-radius:20px;padding:3px;line-height:1.1;box-shadow:0 3px 0 #06245370}
+body.mobile-ui #hud .touch .right-pad button:first-child{width:52px;height:57px;margin:0;font-size:22px;border-radius:18px}
+body.mobile-ui #hud .touch button small{font-size:12px;line-height:1.3;margin:3px 0 0}
+body.mobile-ui #hud .boost-box{bottom:calc(var(--hud-bottom) + 5px);right:calc(50% - 23px);width:46px}
+body.mobile-ui #hud .boost-box button{min-height:44px;height:44px;min-width:44px;border-radius:14px;justify-content:center;padding:3px;box-shadow:none}
+body.mobile-ui #hud .boost-box button>span:not(.bolt){display:none}
+body.mobile-ui #hud .boost-box .bolt{font-size:28px;line-height:1}
+body.mobile-ui #hud .boost-meter{margin:5px 3px 0;height:3px}
+body.mobile-ui #hud .joystick{width:85px;height:85px;bottom:calc(var(--hud-bottom) + 2px);left:18px}
+body.mobile-ui #hud .joystick i{width:36px;height:36px}
+body.mobile-ui #hud .bottom-bar{bottom:calc(var(--hud-bottom) + 91px);left:12px;right:12px;transform:none;width:auto;max-width:none;gap:8px}
+body.mobile-ui #hud #interact{font-size:17px!important;line-height:1.35;min-height:46px;padding:10px 14px;border-radius:13px;box-shadow:0 3px 0 #ba961c}
+body.mobile-ui #hud #interact kbd{display:none}
+
+/* At a thinking gate the run is safely stopped. Replace movement pads with actual tappable lane choices. */
+body.mobile-ui[data-gate-state=waiting] #hud .touch,body.mobile-ui[data-gate-state=waiting] #hud .boost-box{display:none}
+body.mobile-ui[data-gate-state=waiting] #hud .bottom-bar{bottom:var(--hud-bottom);max-width:470px;margin:0 auto;gap:8px}
+body.mobile-ui #hud .mobile-answer-block{display:block;width:100%}
+body.mobile-ui #hud .mobile-choice-note{margin:0 0 6px;padding:3px 8px;font-size:14px;line-height:1.35;text-align:center;color:#fff;background:#092d55df;border-radius:7px;width:fit-content;max-width:100%;margin-inline:auto}
+body.mobile-ui #hud .mobile-choice-note.retry{color:#ffe785;background:#103151f5}
+body.mobile-ui #hud .mobile-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;direction:ltr;pointer-events:auto}
+body.mobile-ui #hud .mobile-choices button{height:58px;min-width:0;padding:6px 8px;border:2px solid #a8e7ef;color:#fff;background:#0d345cee;border-radius:14px;font-size:24px;font-weight:700;line-height:1.2;direction:ltr;white-space:nowrap;position:relative;box-shadow:0 3px 0 #082b5690;touch-action:manipulation}
+body.mobile-ui #hud .mobile-choices button.selected{background:#ffe560;color:#113d56;border-color:#fff5b4;box-shadow:0 3px 0 #b3971d}
+body.mobile-ui #hud .mobile-choices button.selected:after{content:'✓';position:absolute;right:4px;top:2px;font-size:11px;line-height:1;color:#154f68}
+body.mobile-ui[data-gate-state=waiting] #hud #interact{width:100%;max-width:none}
+body.mobile-ui[data-gate-state=waiting] #hud #interact:disabled{opacity:.72}
+body.mobile-ui[data-modal-open=true] #hud .touch,body.mobile-ui[data-modal-open=true] #hud .boost-box{visibility:hidden}
+/* Keep the panel/answer rails out of the centre in landscape instead of squeezing everything vertically. */
+@media(orientation:landscape) and (max-height:540px){
+ body.mobile-ui{--hud-top:max(8px,env(safe-area-inset-top));--hud-bottom:max(8px,env(safe-area-inset-bottom))}
+ body.mobile-ui #hud .mission-pill{top:var(--hud-top);left:50%;right:auto;transform:translateX(-50%);width:calc(100% - 400px);max-width:360px;min-width:140px;height:44px;padding:6px 9px;display:block;text-align:center}
+ body.mobile-ui #hud .mission-pill h2{font-size:14px!important}
+ body.mobile-ui #hud .mission-pill .distance{font-size:12px;margin-top:1px}
+ body.mobile-ui #hud .gate-panel{top:calc(var(--hud-top) + 55px);inset-inline-start:max(12px,env(safe-area-inset-right));inset-inline-end:auto;left:auto;right:auto;width:30vw;min-width:180px;max-width:310px;padding:10px 12px;max-height:calc(100dvh - 95px);overflow:auto}
+ html[dir=rtl] body.mobile-ui #hud .gate-panel{right:max(12px,env(safe-area-inset-right));left:auto}
+ html[dir=ltr] body.mobile-ui #hud .gate-panel{left:max(12px,env(safe-area-inset-left));right:auto}
+ body.mobile-ui #hud .gate-panel h3{font-size:calc(17px * var(--reading-scale))!important;line-height:1.4}
+ body.mobile-ui #hud .gate-panel .eyebrow{font-size:12px}
+ body.mobile-ui #hud .gate-panel .pattern{font-size:23px}
+ body.mobile-ui #hud .gate-panel .peek{font-size:13px!important;padding:5px 9px;min-height:38px;height:38px}
+ body.mobile-ui[data-gate-state=preview] #hud .gate-panel{display:block;min-height:0}
+ body.mobile-ui[data-gate-state=preview] #hud .gate-panel .pattern{margin:4px 0 0}
+ body.mobile-ui #hud .coach,body.mobile-ui #toast{top:calc(var(--hud-top) + 56px);left:12px;right:auto;width:29vw;max-width:305px;min-width:180px}
+ body.mobile-ui #hud .coach p{font-size:14px}
+ body.mobile-ui #hud .coach .robot-face{display:none}
+ body.mobile-ui #hud .hub-info{top:calc(var(--hud-top) + 55px);left:12px;right:auto;width:28vw;min-width:200px}
+ body.mobile-ui #hud .plaza-talk{justify-content:flex-start;gap:6px}
+ body.mobile-ui #hud .plaza-talk button{font-size:14px;min-height:42px;padding:5px 9px}
+ body.mobile-ui #hud .bottom-bar{left:35%;right:35%;bottom:var(--hud-bottom)}
+ body.mobile-ui[data-gate-state=waiting] #hud .bottom-bar{left:auto;right:auto;inset-inline-end:max(12px,env(safe-area-inset-left));width:29vw;min-width:174px;max-width:300px;margin:0;gap:7px}
+ body.mobile-ui #hud .mobile-choices{gap:6px}
+ body.mobile-ui #hud .mobile-choices button{height:50px;border-radius:12px;font-size:20px;padding:4px 3px}
+ body.mobile-ui #hud .mobile-choice-note{font-size:13px;line-height:1.35;margin-bottom:6px}
+ body.mobile-ui #hud #interact{font-size:16px!important;min-height:44px;padding:9px 10px}
+ body.mobile-ui #hud .boost-box{bottom:var(--hud-bottom)}
+ body.mobile-ui[data-screen=game] #rayyanCaption:not(.inline){top:calc(var(--hud-top) + 56px);left:12px;right:auto;bottom:auto;width:28vw;min-width:180px;max-width:300px}
+ body.mobile-ui[data-screen=game] #rayyanCaption:not(.inline)>img{display:none}
+ body.mobile-ui[data-screen=game] #rayyanCaption:not(.inline) p{font-size:calc(15px * var(--reading-scale))!important}
+}
+@media(max-width:360px) and (orientation:portrait){
+ body.mobile-ui #hud .mission-pill h2{font-size:15px!important}
+ body.mobile-ui #hud .hud-right .icon-btn.lang{min-width:69px;padding:0 9px;font-size:14px}
+ body.mobile-ui #hud .score-box{min-width:76px;padding-right:7px;gap:5px}
+ body.mobile-ui #hud .mobile-choices button{font-size:22px;height:54px}
+ body.mobile-ui #hud .gate-panel h3{font-size:calc(18px * var(--reading-scale))!important}
+}
+@media(prefers-reduced-motion:reduce){body.mobile-ui #hud button{transition:none}}
+
+/* Compact locale button only on very short landscape screens. */
+@media(orientation:landscape) and (max-height:540px) and (max-width:600px){
+ body.mobile-ui #hud .hud-right .icon-btn.lang{min-width:48px;padding:0 7px;font-size:14px}
+}
+body.mobile-ui #hud .boost-box:not([hidden]){display:block}
+body.mobile-ui[data-gate-state=waiting] #hud .boost-box:not([hidden]){display:none}
+
+/* Retry dialogue remains audible and captioned, but reuses the dock's status line.
+   Do not stack a second panel over the runner on short phones. */
+body.mobile-ui[data-gate-state=waiting].compact-encourage #rayyanCaption:not(.inline){display:none}
+body.mobile-ui[data-gate-state=waiting].compact-encourage #mobileChoiceNote{line-height:1.5;color:#fff3c3}
