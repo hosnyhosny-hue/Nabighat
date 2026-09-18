@@ -1,0 +1,49 @@
+name: Validate full v3 preview (no deployment)
+on:
+  push:
+    branches: [feature/global-expedition-v3]
+    paths:
+      - 'v3/**'
+      - '_data/**'
+      - '_includes/**'
+      - 'index.html'
+      - '.github/workflows/v3-preview-check.yml'
+permissions:
+  contents: read
+concurrency:
+  group: v3-preview-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Build full preview and materialize all editable sources
+        run: python3 v3/build.py --export-source
+      - name: Domain regression tests and syntax
+        run: |
+          node --test v3/core.test.mjs
+          for file in _preview/source/src/*.js; do node --check "$file"; done
+          python3 _preview/source/build.py
+          cmp _preview/index.html _preview/source/index.html
+      - name: Validate the branch homepage through standard Jekyll
+        uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697
+        with:
+          source: ./
+          destination: ./_site
+      - name: Verify Jekyll output equals the locked standalone game
+        run: cmp _preview/index.html _site/index.html
+      - name: Record exact source commit
+        run: |
+          git rev-parse HEAD > _preview/SOURCE_COMMIT.txt
+          sha256sum _preview/index.html > _preview/SHA256SUMS.txt
+      - name: Save private-review artifact; do not deploy
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: nabigha-v3-branch-preview
+          path: _preview/
+          retention-days: 7
+          if-no-files-found: error

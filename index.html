@@ -1,19 +1,37 @@
 ---
 layout: null
 ---
-{%- capture game -%}{%- include sky-sprint-2.2.2.html -%}{%- endcapture -%}
-{%- assign game_size = game | size -%}
-{%- if game_size == 323994 -%}
-{{- game | slice: 0, 61376 -}}
+{%- capture base -%}{%- include sky-sprint-2.2.2.html -%}{%- endcapture -%}
+{%- assign base_size = base | size -%}
+{%- if base_size == 323994 -%}
+{%- capture parent -%}
+{{- base | slice: 0, 61376 -}}
 {%- include mobile-hud.css -%}
 {%- assign cursor = 61376 -%}
 {%- for edit in site.data.mobile_update -%}
-  {%- assign count = edit[0] | minus: cursor -%}
-  {{- game | slice: cursor, count -}}
-  {{- edit[2] -}}
-  {%- assign cursor = edit[1] -%}
+{%- assign count = edit[0] | minus: cursor -%}
+{{- base | slice: cursor, count -}}{{- edit[2] -}}
+{%- assign cursor = edit[1] -%}
 {%- endfor -%}
-{{- game | slice: cursor, game_size -}}
+{{- base | slice: cursor, base_size -}}
+{%- endcapture -%}
+{%- assign parent_size = parent | size -%}
+{%- if parent_size == 347024 -%}
+{%- capture integrated -%}
+{%- assign cursor = 0 -%}
+{%- for edit in site.data.global_update -%}
+{%- assign count = edit[0] | minus: cursor -%}
+{{- parent | slice: cursor, count -}}{{- edit[2] -}}
+{%- assign cursor = edit[1] -%}
+{%- endfor -%}
+{{- parent | slice: cursor, parent_size -}}
+{%- endcapture -%}
+{%- capture global_css -%}{%- include_relative v3/src/expedition.css -%}{%- endcapture -%}
+{%- capture global_js -%}{%- include_relative v3/src/expedition-01.js -%}{%- include_relative v3/src/expedition-02.js -%}{%- include_relative v3/src/expedition-03.js -%}{%- include_relative v3/src/expedition-04.js -%}{%- endcapture -%}
+{{- integrated | replace: '/*GLOBALSTYLE*/', global_css | replace: '/*GLOBAL*/', global_js -}}
 {%- else -%}
-{{- game -}}
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Preview build mismatch</title><h1>Preview integrity check failed</h1><p>Build from the locked development source using python3 v3/build.py.</p></html>
+{%- endif -%}
+{%- else -%}
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Preview base mismatch</title><h1>Preserved source changed</h1><p>Stop and regenerate the integration offsets. Do not publish this result.</p></html>
 {%- endif -%}
