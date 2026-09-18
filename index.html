@@ -33,10 +33,14 @@ layout: null
 {%- for edit in site.data.clear_start -%}
 {%- assign clear_game = clear_game | replace: edit[0], edit[1] -%}
 {%- endfor -%}
-{%- capture clear_css -%}{%- include_relative v3/clear-start/start.css -%}{%- endcapture -%}
+{%- capture clear_css -%}{%- include_relative v3/clear-start/start.css -%}{%- include_relative v3/city-drive/city.css -%}{%- endcapture -%}
 {%- capture clear_js -%}{%- include_relative v3/clear-start/start.js -%}{%- endcapture -%}
 {%- capture thumbs -%}{"world":"{%- include_relative v3/clear-start/world.data -%}","race":"{%- include_relative v3/clear-start/race.data -%}","run":"{%- include_relative v3/clear-start/run.data -%}"}{%- endcapture -%}
 {%- assign clear_js = clear_js | replace: '/*CS_THUMBNAILS*/', thumbs -%}
+{%- capture city_js -%}{%- include_relative v3/city-drive/core.js -%}{%- include_relative v3/city-drive/car.js -%}{%- include_relative v3/city-drive/scene.js -%}{%- include_relative v3/city-drive/driver.js -%}{%- include_relative v3/city-drive/integrate.js -%}{%- endcapture -%}
+{%- capture city_boot -%}csInit();{{- city_js -}}{%- endcapture -%}
+{%- assign clear_js = clear_js | replace: 'csInit();', city_boot -%}
+{%- assign clear_game = clear_game | replace: 'right=v.norm([dir[2],0,-dir[0]])', 'right=v.norm([-dir[2],0,dir[0]])' -%}
 {{- clear_game | replace: '/*CLEAR_START_CSS*/', clear_css | replace: '/*CLEAR_START_JS*/', clear_js -}}
 {%- else -%}
 <!doctype html><html lang="en"><meta charset="utf-8"><title>Preview build mismatch</title><h1>Preview integrity check failed</h1><p>Build from the locked development source using python3 v3/build.py.</p></html>
