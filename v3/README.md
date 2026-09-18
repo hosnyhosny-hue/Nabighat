@@ -1,31 +1,35 @@
-# Nabigha — Global Expedition / Foundation review
+# Nabigha v3 — complete playable branch preview
 
-Status: development only. `main` and the public GitHub Pages game remain at 2.2.3. This branch adds independently testable domain primitives; it does NOT switch the published homepage to v3.
+## Status
+The complete renderer/UI integration is now tracked on `feature/global-expedition-v3`. This is no longer the domain-only foundation. PR #2 remains draft; do not merge or deploy without separate approval. `main` and the published GitHub Pages game are not changed by this branch update.
 
-## Scope of this branch
-- `core.mjs`: bounded local route normalisation for the actual supplied nested 3D-point schema, arc-length sampling, multi-solution 8-metre bridge building, a pump/pipe cooperation graph and separated replay keys.
-- `core.test.mjs`: six Node test cases. Run `node --test v3/core.test.mjs`.
-- This module has no network calls, storage side effects, third-party asset bytes or religious scoring.
+## Build and play locally
+```sh
+python3 v3/build.py --export-source
+node --test v3/core.test.mjs
+python3 -m http.server 8080 --directory _preview
+```
+Open localhost:8080. Use Start the expedition / ابدأ بعثة الإعمار, Horizon circuit / مضمار الآفاق, or Local asset lab. The older Sky Sprint chapters remain available.
 
-## Complete playable preview delivered separately
-The conversation also includes the full, independently runnable HTML preview and its full source ZIP. That build includes the animated 3D expedition, real bridge geometry and water restoration, hovercraft circuit, local personal replay, original biomes and local asset-inspection UI. Its integrated renderer/UI sources have NOT yet been imported into this branch. Do not present this branch's homepage as the v3 preview.
+All required code and the previously approved character illustrations are already tracked in this branch. No conversation file, archive, package download or private asset is needed to build. The only optional runtime fetch is the existing IBM webfont; fallback fonts remain available.
 
-Preview build: `3.0.0-preview.1`
-Preview HTML SHA256: `31b4084bea0074a28d99fc3816c162b93b646dffa06bc34f5da5ca1a544953a1`
-Parent standalone 2.2.3 SHA256: `548eb0097ca4239269f86246598f9dabbd2ab8be90a6130ce71347b5de2993e6`
+## Source layout
+The established repository stores the complete legacy game in `_includes/sky-sprint-2.2.2.html`, with the reviewed mobile integration in `_data/mobile_update.json` and `_includes/mobile-hud.css`. These include the renderer, character, approved illustrations, Arabic/English copy, sound policy and nine thinking gates.
 
-## Verification
-Six pure Node test cases passed for this branch module. The separately delivered full preview passed 84 checks in Chromium with actual WebGL software rendering, simulated touch and explicitly simulated storage on an about:blank test document. Tests use deterministic stepping for most scenarios plus a real animation-frame release smoke test. No physical phone, child usability, Apple/Google store approval, performance certification or reviewed new Arabic audio is claimed.
+`v3/src/expedition-01.js` through `04.js` are ordered source fragments of the full new expedition module, not four independent scripts. They contain the entire UI, world geometry, quests, water graph, construction, vehicle, circuit, replay, input and local lab. `v3/src/expedition.css` contains the complete new layout. `_data/global_update.json` connects this module to the existing renderer, animation loop, camera, input and home buttons. All integration is build-time; the output has no runtime loader, iframe, eval, server or asset fetcher.
 
-## Asset audit / release hold
-`assets-game.rar` contains 112 files, 13 Draco-compressed GLBs, 14 sound files, and 3,000 nested position/vector pairs in its primary route JSON. The manifest states: "All assets were extracted from a locally-mirrored WebGL racing game." No documented commercial license was found in the archive. The manifest's stated route schema differs from the actual JSON.
+`index.html` now assembles v3 using the same standard Jekyll mechanism as the repository's previous release. `v3/build.py` performs the identical assembly offline and verifies the parent and final SHA-256. It fails rather than silently falling back to an old version. `--export-source` additionally writes every editable JS/CSS module, template and the three existing hero images to `_preview/source`; that folder rebuilds independently with its own `build.py`.
 
-No archive meshes, audio, textures, route coordinates or font files are committed here. Supplied GLBs are only metadata-inspected in the local lab, not rendered. Original geometric hovercraft and environment decorations are used in the distributable preview. Imported route evaluation remains separate and local pending documented rights. The full original assets must not be silently published.
+Original conversation preview SHA-256: `31b4084bea0074a28d99fc3816c162b93b646dffa06bc34f5da5ca1a544953a1`.
+Integrated preview SHA-256: `1d2aa8dae91948da9f20c1a76733c9f9eb1221c8f063e2bb6813cd054bd1a1ba` (435867 bytes). The sole gameplay-source difference is one insignificant whitespace character in a pointer-event handler. Features and rules are unchanged.
 
-## Design direction
-Reference set: Fortnite Creative, Subway Surfers, Minecraft, Fall Guys, Rocket League, Mario Kart 8 Deluxe, Super Mario Odyssey, Astro Bot, Zelda: Tears of the Kingdom, Animal Crossing: New Horizons, Stardew Valley, Sky: Children of the Light, Journey, Monument Valley 2, Portal 2, It Takes Two, Sackboy: A Big Adventure, Alto's Odyssey, Tetris Effect: Connected and Trackmania.
-This is a curated design benchmark, not an asserted universal sales/rating Top 20. The complete sourced comparison and feature/status matrix are supplied with the preview project.
+## Included gameplay
+- Return Salim's key; construct a physical 8m bridge with multiple solutions and undo; Noor holds the pump while the player connects the water; visible oasis restoration and journal.
+- Original hovercraft circuit, steering assist, hop/boost/brake, checkpoints, local personal replay and untimed exploration. Three visual biomes share one route geometry.
+- Local route import and GLB metadata inspection, not compressed-model rendering or multiplayer.
+- Legacy chapters, compact mobile HUD, Arabic/English, IBM font settings and reviewed-Arabic-recordings-only policy are preserved.
 
-Trust, care, craft and cooperation must be actions with visible results. Dhikr is optional dialogue, never points, immunity or a gate condition. No weapons, open chat, ads, loot boxes or child accounts. Preserve IBM typography, compact mobile HUD, Arabic/English and the reviewed-Arabic-audio-only policy.
+## Safety and review limits
+No archive models, textures, sounds, route coordinates or font binaries are uploaded. No child accounts, chat, ads, loot boxes or religious scoring. No new Arabic recording is approved. This is not a commercial/store-ready product. Physical-phone, pronunciation, child usability and performance review remain separate.
 
-Next integration gate: review the full preview, import its exact source with the above integrity lock, repeat real-device/voice/UI checks, then separately approve deployment. Do not merge as a claim of a complete global commercial release.
+The branch-only Actions workflow has `contents: read`, checks builds/tests and stores a review artifact. It has no deployment step, Pages permission, environment, ref mutation or write token. Browser verification results are recorded separately in this PR after retrieving/verifying the branch snapshot.

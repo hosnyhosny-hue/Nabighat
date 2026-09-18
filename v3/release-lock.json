@@ -1,11 +1,15 @@
 {
-  "version": "3.0.0-preview.1",
-  "status": "domain-foundation-only-in-repository",
-  "full_preview_location": "conversation-delivered-source-and-html",
-  "preview_sha256": "31b4084bea0074a28d99fc3816c162b93b646dffa06bc34f5da5ca1a544953a1",
-  "base_commit": "334a12c4dc484bae1633bfbb4aa90c12b3e0500b",
-  "public_site_changed": false,
-  "archive_assets_published": false,
-  "physical_device_tested": false,
-  "new_arabic_audio_reviewed": false
+  "build": "3.0.0-preview.1",
+  "scope": "complete-playable-branch-integration-no-deployment",
+  "branch": "feature/global-expedition-v3",
+  "original_preview_sha256": "31b4084bea0074a28d99fc3816c162b93b646dffa06bc34f5da5ca1a544953a1",
+  "parent_223_sha256": "548eb0097ca4239269f86246598f9dabbd2ab8be90a6130ce71347b5de2993e6",
+  "integrated_preview_sha256": "1d2aa8dae91948da9f20c1a76733c9f9eb1221c8f063e2bb6813cd054bd1a1ba",
+  "integrated_preview_bytes": 435867,
+  "main_preserved_at": "334a12c4dc484bae1633bfbb4aa90c12b3e0500b",
+  "merge_approved": false,
+  "public_deployment_approved": false,
+  "archive_assets_included": false,
+  "font_binaries_included": false,
+  "new_arabic_recordings": false
 }
