@@ -1,0 +1,78 @@
+[
+  [
+    "let globalExpedition=null;",
+    "let globalExpedition=null;\nconst clearStart={ready:false,open:false,page:'choose',busy:false,lang:'ar',countdown:0,useCountdown:true,timed:true,trained:false,training:{active:false,step:0,crossed:false,retryUntil:0}};"
+  ],
+  [
+    "function simulate(",
+    "function simulateBase("
+  ],
+  [
+    "function scene(",
+    "function sceneBase("
+  ],
+  [
+    "function updateHud(",
+    "function updateHudBase("
+  ],
+  [
+    "function goHome(",
+    "function goHomeBase("
+  ],
+  [
+    "async function launchHub(",
+    "async function launchHubBase("
+  ],
+  [
+    "async function launchRun(",
+    "async function launchRunBase("
+  ],
+  [
+    "async function startGlobal(",
+    "async function startGlobalBase("
+  ],
+  [
+    "paused:()=>!!modalKind,",
+    "paused:()=>!!modalKind||clearStart.open,"
+  ],
+  [
+    "if(p.ground&&Math.hypot(p.x-x,p.z-z)<1.1)",
+    "if(!clearStart.training.active&&p.ground&&Math.hypot(p.x-x,p.z-z)<1.1)"
+  ],
+  [
+    "for(const c of hubCoins)if(!c.taken&&Math.hypot",
+    "for(const c of hubCoins)if(!clearStart.training.active&&!c.taken&&Math.hypot"
+  ],
+  [
+    "for(let i=0;i<3;i++){const locked=i>0&&!settings.completed[i-1];list.push",
+    "if(!clearStart.training.active)for(let i=0;i<3;i++){const locked=i>0&&!settings.completed[i-1];list.push"
+  ],
+  [
+    "for(const c of hubCoins)if(!c.taken)list.push",
+    "for(const c of hubCoins)if(!clearStart.training.active&&!c.taken)list.push"
+  ],
+  [
+    "if(ok&&!modalKind&&mode!=='home')audio.start()",
+    "if(ok&&!modalKind&&mode!=='home'&&!clearStart.open)audio.start()"
+  ],
+  [
+    "$('globalLaunch').textContent=T('launch');$('globalRace').textContent=T('race');",
+    "($('legacy-globalLaunch')||$('globalLaunch')).textContent=T('launch');($('legacy-globalRace')||$('globalRace')).textContent=T('race');"
+  ],
+  [
+    "\nif(new URLSearchParams(location.search).has('test'))window.NABIGHA_V2_TEST=",
+    "\n/*CLEAR_START_JS*/\n\nif(new URLSearchParams(location.search).has('test'))window.NABIGHA_V2_TEST="
+  ],
+  [
+    "</style></head>",
+    "\n/*CLEAR_START_CSS*/\n</style></head>"
+  ],
+  [
+    " if(kind==='intro')html=modalShell('introTitle',`<p>${T(chapterKeys[selected]+'D')}</p><p>${T('introBody')}</p><div class=\"control-grid\"><div>${T('move')}<kbd>← → / A D</kbd></div><div>${T('jump')}<kbd>Space / ↑</kbd></div><div>${T('slide')}<kbd>↓ / S</kbd></div><div>${T('boost')}<kbd>Shift</kbd></div><div>${T('glide')}<kbd>G / Space ×2</kbd></div><div>${T('act')}<kbd>E / Enter</kbd></div></div><p>${mobileUI?T('mobileIntro'):touch?T('guideMobile'):T('audioNote')}</p><div class=\"modal-actions\">${btn('introGo','close','primary')}${btn('settings','settings')}${btn('wordsShort','words')}</div>`);",
+    " if(kind==='intro')html=modalShell('introTitle',`<p>${csText('chapterHint')}</p><div class=\"save-note\">${settings.lang==='ar'?'بدّل المسار يمينًا ويسارًا، واقفز فوق الحاجز الأول. زر ؟ يوقف اللعب ويعرض المساعدة.':'Change lanes left and right, then jump over the first hurdle. The ? button pauses and opens help.'}</div><div class=\"modal-actions\">${btn('introGo','close','primary')}${btn('settings','settings')}</div>`);"
+  ],
+  [
+    "VERSION='3.0.0-preview.1'",
+    "VERSION='3.0.1-review.1'"
+  ]
+]

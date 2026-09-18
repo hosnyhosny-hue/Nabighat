@@ -1,0 +1,34 @@
+name: Check Clear Start review (no deployment)
+on:
+  push:
+    branches: [fix/clear-start-guided-training-301]
+    paths: ['v3/clear-start/**', '_data/clear_start.json', 'index.html', '.github/workflows/clear-start-review.yml']
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Build and verify the review output
+        run: |
+          python3 v3/clear-start/build.py
+          node --test v3/core.test.mjs
+          echo 'b2e3404fefc29775c0986005dae8c26ab9e989cf25facbf7637da737645d0bc1  _review/index.html' | sha256sum --check
+      - name: Check the branch page through Jekyll
+        uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697
+        with:
+          source: ./
+          destination: ./_site
+      - name: Compare Jekyll and standalone output
+        run: cmp _review/index.html _site/index.html
+      - name: Store review build without deployment
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: nabigha-clear-start-review
+          path: _review/
+          retention-days: 7
+          if-no-files-found: error

@@ -28,7 +28,16 @@ layout: null
 {%- endcapture -%}
 {%- capture global_css -%}{%- include_relative v3/src/expedition.css -%}{%- endcapture -%}
 {%- capture global_js -%}{%- include_relative v3/src/expedition-01.js -%}{%- include_relative v3/src/expedition-02.js -%}{%- include_relative v3/src/expedition-03.js -%}{%- include_relative v3/src/expedition-04.js -%}{%- endcapture -%}
-{{- integrated | replace: '/*GLOBALSTYLE*/', global_css | replace: '/*GLOBAL*/', global_js -}}
+{%- capture original_game -%}{{- integrated | replace: '/*GLOBALSTYLE*/', global_css | replace: '/*GLOBAL*/', global_js -}}{%- endcapture -%}
+{%- assign clear_game = original_game -%}
+{%- for edit in site.data.clear_start -%}
+{%- assign clear_game = clear_game | replace: edit[0], edit[1] -%}
+{%- endfor -%}
+{%- capture clear_css -%}{%- include_relative v3/clear-start/start.css -%}{%- endcapture -%}
+{%- capture clear_js -%}{%- include_relative v3/clear-start/start.js -%}{%- endcapture -%}
+{%- capture thumbs -%}{"world":"{%- include_relative v3/clear-start/world.data -%}","race":"{%- include_relative v3/clear-start/race.data -%}","run":"{%- include_relative v3/clear-start/run.data -%}"}{%- endcapture -%}
+{%- assign clear_js = clear_js | replace: '/*CS_THUMBNAILS*/', thumbs -%}
+{{- clear_game | replace: '/*CLEAR_START_CSS*/', clear_css | replace: '/*CLEAR_START_JS*/', clear_js -}}
 {%- else -%}
 <!doctype html><html lang="en"><meta charset="utf-8"><title>Preview build mismatch</title><h1>Preview integrity check failed</h1><p>Build from the locked development source using python3 v3/build.py.</p></html>
 {%- endif -%}
