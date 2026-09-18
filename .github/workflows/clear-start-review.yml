@@ -1,0 +1,27 @@
+name: Check city driving review (no deployment)
+on:
+  push:
+    branches: [fix/clear-start-guided-training-301]
+    paths: ['v3/**', '_data/**', '_includes/**', 'index.html', '.github/workflows/clear-start-review.yml']
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Build city review and test domain logic
+        run: |
+          python3 v3/city-drive/build.py
+          node --test v3/city-drive/core.test.cjs
+          node --test v3/core.test.mjs
+      - name: Build branch homepage with Jekyll
+        uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697
+        with:
+          source: ./
+          destination: ./_site
+      - name: Compare exact output (no deployment)
+        run: cmp _city_review/index.html _site/index.html
