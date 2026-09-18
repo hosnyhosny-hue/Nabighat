@@ -1,0 +1,19 @@
+{
+  "source_commit": "2d0013c8a8d3ff39649a55e0021fed74ac0d2629",
+  "blobs": {
+    "_includes/sky-sprint-2.2.2.html": "d91bb12de7bc26ba71291333cd7eb5790863e367",
+    "_includes/mobile-hud.css": "6132dda113eb07e343708defcdfda75213a6e148",
+    "_data/mobile_update.json": "7706bceb216a5e8f8f7238a37365f6534d6da304",
+    "_data/global_update.json": "7f3b83b264f1f1cd36342fbacca9cb5a7b7d9b3c",
+    "v3/build.py": "d98e2ffe6c9842476055e444cd1a6f75481ac666",
+    "v3/source-map.json": "1b8568cd58ba8e63dfbaa4765cea9511e2fa5648",
+    "v3/core.mjs": "febd155a0e5634f763d5ab54baf895b5f4dc5fb3",
+    "v3/core.test.mjs": "bd33a4d5a90101e5360fcce57972155cc8f2e7a7",
+    "v3/src/expedition-01.js": "d84d4d677b180bee0fa87eb7c4c10c0cbb8a8143",
+    "v3/src/expedition-02.js": "4ffcde479eb58081455149890877e061d6b10089",
+    "v3/src/expedition-03.js": "b8aeb0ce813e545032610045a84447dfb9731325",
+    "v3/src/expedition-04.js": "f964301d2fa86c3af3ab41f37458013a22cb51d2",
+    "v3/src/expedition.css": "8d58b97927faec56951302da0dc09cc1c4cc96ce",
+    "index.html": "1908eb55098658f548ffb1766e049e33de9db5e5"
+  }
+}
